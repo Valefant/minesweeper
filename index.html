@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minesweeper</title>
+    <style>
+        :root {
+            --beginner-rows: 9;
+            --beginner-columns: 9;
+            --beginner-mines: 10;
+            --intermediate-rows: 16;
+            --intermediate-columns: 16;
+            --intermediate-mines: 40;
+            --expert-rows: 16;
+            --expert-columns: 30;
+            --expert-mines: 99;
+
+            --cell-width: 30px;
+        }
+
+        .unselectable {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .base-cell {
+            display: flex;
+            background: #C6C6C6;
+            justify-content: center;
+            align-items: center;
+            width: var(--cell-width);
+            height: var(--cell-width);
+            font-size: calc(0.65 * var(--cell-width));
+        }
+
+        .revealed-cell {
+            box-sizing: border-box;
+            border: 1px solid darkgrey;
+        }
+
+        #game {
+            display: inline-block;
+        }
+
+        #toolbar {
+            display: flex;
+            border-bottom: 2px solid #808080;
+            justify-content: space-around;
+            align-items: center;
+            background-color: lightgrey;
+            padding: 0.5rem;
+        }
+
+        .fixed-width-toolbar-element {
+            width: 50px;
+            text-align: center;
+        }
+
+        #gameField {
+            padding: 0.5rem;
+            background: lightgrey;
+            display: grid;
+        }
+
+        .beginner {
+            grid-template-rows: repeat(var(--beginner-rows), var(--cell-width));
+            grid-template-columns: repeat(var(--beginner-columns), var(--cell-width));
+        }
+
+        .intermediate {
+            grid-template-rows: repeat(var(--intermediate-rows), var(--cell-width));
+            grid-template-columns: repeat(var(--intermediate-columns), var(--cell-width));
+        }
+
+        .expert {
+            grid-template-rows: repeat(var(--expert-rows), var(--cell-width));
+            grid-template-columns: repeat(var(--expert-columns), var(--cell-width));
+        }
+
+        html {
+            font-size: calc(0.65 * var(--cell-width));
+        }
+    </style>
+</head>
+<body class="unselectable">
+<div style="margin-bottom: 1rem">
+    <select id="difficulty">
+        <option selected value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="expert">Expert</option>
+    </select>
+</div>
+<div id="game" style="margin-bottom: 1rem">
+    <div id="toolbar">
+        <span id="flagCounter" class="fixed-width-toolbar-element">10</span>
+        <button id="reset" class="base-cell">🙂</button>
+        <span id="elapsedSeconds" class="fixed-width-toolbar-element">0</span>
+    </div>
+    <div id="gameField" class="beginner">
+    </div>
+</div>
+<div>
+    <div>
+        <input id="replay" type="range" min="1" max="1" value="1" disabled/>
+    </div>
+    <div id="gameEnded"></div>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
